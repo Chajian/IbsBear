@@ -1,4 +1,8 @@
+import com.bear.data.Item;
+import com.bear.sql.MyBatis;
+import com.bear.sql.dao.EssentialDao;
 import com.bear.util.StringRule;
+import com.bear.util.Translate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +11,11 @@ import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        String rule = StringRule.TRANSLATEMESSAGE.replaceKey("");
-        Pattern pattern = Pattern.compile(rule);
-        Matcher matcher = pattern.matcher("[234234]sdfsdf");
-        System.out.println(matcher.replaceAll(""));
+//        MyBatis myBatis = MyBatis.getMyBatis();
+//        myBatis.getEssentialDao().r egister(936796603L);
+//        myBatis.commit();
+//        System.out.println(myBatis.getEssentialDao().getUser(936796603L).toString());
+        Item i = MyBatis.getMyBatis().getEssentialDao().getItemInfo(00000001);
+        System.out.println(i.toString());
     }
 }

@@ -8,7 +8,6 @@
     <artifactId>bear</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <parent>
         <groupId>com.IceCreamQAQ.YuQ</groupId>
         <artifactId>YuQ-Mirai-Starter</artifactId>
@@ -21,6 +20,8 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+
     </properties>
 
     <dependencies>
@@ -29,9 +30,31 @@
             <artifactId>YuQ-Mirai</artifactId>
             <version>0.0.6.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.14</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.4</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

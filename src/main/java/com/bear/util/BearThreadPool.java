@@ -1,7 +1,6 @@
 package com.bear.util;
 
-import com.bear.menu.api.BasePlugin;
-import com.bear.menu.api.Plugin;
+import com.bear.menu.plugin.BasePlugin;
 import com.sun.corba.se.spi.orbutil.threadpool.ThreadPoolManager;
 
 import java.util.HashMap;
@@ -39,11 +38,6 @@ public class BearThreadPool {
         }
     }
 
-//    //加入线程池
-//    public void putRunnable(BasePlugin plugin){
-//        threadPool.execute(plugin);
-//        threads.put(plugin.getName(),plugin);
-//    }
 
     public static BearThreadPool getBearThreadPool() {
         if(bearThreadPool == null)

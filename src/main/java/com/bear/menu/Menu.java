@@ -2,22 +2,19 @@ package com.bear.menu;
 
 import com.IceCreamQAQ.Yu.annotation.Event;
 import com.IceCreamQAQ.Yu.annotation.EventListener;
-import com.bear.menu.api.BasePlugin;
-import com.bear.menu.api.Plugin;
-import com.bear.util.BearThreadPool;
+import com.bear.data.Item;
+import com.bear.menu.plugin.BasePlugin;
+import com.bear.menu.plugin.Economy;
+import com.bear.sql.MyBatis;
+import com.bear.util.Translate;
 import com.icecreamqaq.yuq.entity.Group;
 import com.icecreamqaq.yuq.entity.Member;
 import com.icecreamqaq.yuq.event.GroupMessageEvent;
-import com.icecreamqaq.yuq.message.Message;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.regex.Pattern;
 
 @EventListener
 public class Menu {
-    public static Menu menu = null;
     /*菜单加载的插件*/
     HashMap<String, BasePlugin> plugins = new HashMap<>();
 
@@ -26,11 +23,17 @@ public class Menu {
     * */
     HashMap<String,BasePlugin> commands = new HashMap<>();
 
+    HashMap<String,Long> enablegroups = new HashMap<>();
 
-    public Menu() {
-        initPlugin();
-        initCommands();
-        menu = this;
+     {
+        Economy economy = new Economy();
+        plugins.put("积分", economy);
+        enablegroups.put("插件",492960241L);
+
+
+         initPlugin();
+         initCommands();
+        System.out.println("群聊");
     }
 
     /**
@@ -57,7 +60,7 @@ public class Menu {
     public void initCommands(){
         for(BasePlugin plugin:plugins.values()){
             System.out.println("加载插件命令:"+plugin.getName());
-            if(commands.containsKey(plugin.getRootCommands()))
+            if(!commands.containsKey(plugin.getRootCommands()))
                 commands.put(plugin.getRootCommands(),plugin);
             else
                 System.out.println(plugin.getName()+"插件有冲突");
@@ -66,13 +69,21 @@ public class Menu {
 
     @Event
     public void run(GroupMessageEvent event){
-        String message = event.getMessage().sourceMessage.toString();
-
-    }
-
-    public static Menu getMenu() {
-        if(menu == null)
-            menu = new Menu();
-        return menu;
+        //step 1
+        //通过消息匹配对应的插件，从而运行对应插件的execute()
+        String message = Translate.getRealMessage(event.getMessage().sourceMessage.toString());
+        Member member = event.getSender();
+        Group group = event.getGroup();
+        Item i = MyBatis.getMyBatis().getEssentialDao().getItemInfo(00000001);
+        if(enablegroups.values().contains(group.getId())) {
+            for (String rootcommands : commands.keySet()) {
+                System.out.println(rootcommands+":"+message);
+                if (message.equals(rootcommands)) {
+                    BasePlugin basePlugin = commands.get(rootcommands);
+                    basePlugin.executeCommand(member, group, message);
+                    System.out.println("执行经济插件");
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bear.sql.dao.EssentialDao">
+    <resultMap id="User" type="com.bear.data.User">
+        <result column="account" property="account"/>
+        <result column="money" property="money"/>
+        <result column="head" property="head"/>
+        <result column="chest" property="chest"/>
+        <result column="pants" property="pants"/>
+        <result column="let" property="let"/>
+        <result column="arms" property="arms"/>
+        <result column="backid" property="backid"/>
+    </resultMap>
+
+    <resultMap id="Item" type="com.bear.data.Item">
+        <result column="itemid" property="item"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="property" property="property"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <select id="getUser" resultType="com.bear.data.User">
+        SELECT * FROM ibs_user WHERE account = #{account}
+    </select>
+
+    <select id="getItemInfo" resultType="com.bear.data.Item">
+        SELECT * FROM ibs_items WHERE itemid = #{itemid}
+    </select>
+
+    <insert id="register">
+        INSERT INTO ibs_user VALUES (#{account},0,null,null,null,null,null,null);
+    </insert>
+
+    <insert id="registerItem">
+        INSERT INTO ibs_items VALUES(#{itemid},#{name},#{type},#{property},#{description});
+    </insert>
+
+
+</mapper>
