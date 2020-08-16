@@ -31,11 +31,11 @@
     </select>
 
     <insert id="register">
-        INSERT INTO ibs_user VALUES (#{account},0,null,null,null,null,null,null);
+        INSERT INTO ibs_user VALUES (#{account},0,null,null,null,null,null,null)
     </insert>
 
     <insert id="registerItem">
-        INSERT INTO ibs_items VALUES(#{itemid},#{name},#{type},#{property},#{description});
+        INSERT INTO ibs_items VALUES(#{itemid},#{name},#{type},#{property},#{description})
     </insert>
 
 

@@ -2,8 +2,8 @@ package com.bear.menu.plugin;
 
 import com.bear.data.Item;
 import com.bear.data.User;
-import com.bear.sql.MyBatis;
 import com.bear.sql.dao.EssentialDao;
+import com.bear.sql.sqlite.person.EssentialSqlLite;
 import com.icecreamqaq.yuq.entity.Group;
 import com.icecreamqaq.yuq.entity.Member;
 import com.icecreamqaq.yuq.message.Message;
@@ -33,19 +33,21 @@ public class Economy extends BasePlugin {
     public boolean executeCommand(Member member, Group group, String message) {
         System.out.println("信息经济000");
         try {
-            User user = MyBatis.getMyBatis().getEssentialDao().getUser(member.getId());
+            User user = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().getUser(member.getId());
 
             if (user == null) {
-                MyBatis.getMyBatis().getEssentialDao().register(member.getId());
+//                MyBatis.getMyBatis().getEssentialDao().register(member.getId());
+                User user1 = new User(member.getId(),0,0,0,0,0,0,0);
+                EssentialSqlLite.getEssentialSqlLite().getExcuteSql().registerUser(user1);
             } else {
 
             }
 
-            Item head = MyBatis.getMyBatis().getEssentialDao().getItemInfo(user.getHead());
-            Item chest = MyBatis.getMyBatis().getEssentialDao().getItemInfo(user.getChest());
-            Item pants = MyBatis.getMyBatis().getEssentialDao().getItemInfo(user.getPants());
-            Item let = MyBatis.getMyBatis().getEssentialDao().getItemInfo(user.getLet());
-            Item arms = MyBatis.getMyBatis().getEssentialDao().getItemInfo(user.getArms());
+            Item head = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().getItem(user.getHead());
+            Item chest = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().getItem(user.getChest());
+            Item pants = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().getItem(user.getPants());
+            Item let = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().getItem(user.getLet());
+            Item arms = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().getItem(user.getArms());
 
             String response = "----------"+member.getNameCard()+"积分信息---------\n" +
                     "金币:"+user.getMoney()+"\n" +

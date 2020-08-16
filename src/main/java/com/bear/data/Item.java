@@ -14,6 +14,14 @@ public class Item {
     String property;
     String des;
 
+    public Item(int itemid, String name, int type, String property, String des) {
+        this.itemid = itemid;
+        this.name = name;
+        this.type = type;
+        this.property = property;
+        this.des = des;
+    }
+
     public int getItemid() {
         return itemid;
     }

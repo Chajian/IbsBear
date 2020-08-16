@@ -13,6 +13,17 @@ public class User {
     int arms;
     int backid;
 
+    public User(long account, double money, int head, int chest, int pants, int let, int arms, int backid) {
+        this.account = account;
+        this.money = money;
+        this.head = head;
+        this.chest = chest;
+        this.pants = pants;
+        this.let = let;
+        this.arms = arms;
+        this.backid = backid;
+    }
+
     public long getAccount() {
         return account;
     }

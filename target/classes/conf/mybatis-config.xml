@@ -16,7 +16,7 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/bear/sql/dao/EssentialDao.xml"></mapper>
+        <mapper class="com.bear.sql.dao.EssentialDao"></mapper>
     </mappers>
 
 </configuration>

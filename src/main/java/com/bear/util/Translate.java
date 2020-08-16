@@ -18,7 +18,17 @@ public class Translate {
     public static String getRealMessage(String string){
         Pattern pattern = Pattern.compile(StringRule.TRANSLATEMESSAGE.rule);
         Matcher matcher = pattern.matcher(string);
+        if(matcher.find())
         return matcher.replaceAll("");
+        else {
+            Pattern pattern1 = Pattern.compile(StringRule.TRANSLATEMESSAGETWO.rule);
+            Matcher matcher1 = pattern1.matcher(string);
+            if(matcher1.find()) {
+                String message = matcher1.group().replace("\"", "");
+                return message;
+            }
+        }
+        return "";
     }
 
     /**

@@ -2,10 +2,9 @@ package com.bear.menu;
 
 import com.IceCreamQAQ.Yu.annotation.Event;
 import com.IceCreamQAQ.Yu.annotation.EventListener;
-import com.bear.data.Item;
 import com.bear.menu.plugin.BasePlugin;
 import com.bear.menu.plugin.Economy;
-import com.bear.sql.MyBatis;
+import com.bear.sql.sqlite.person.EssentialSqlLite;
 import com.bear.util.Translate;
 import com.icecreamqaq.yuq.entity.Group;
 import com.icecreamqaq.yuq.entity.Member;
@@ -29,7 +28,7 @@ public class Menu {
         Economy economy = new Economy();
         plugins.put("积分", economy);
         enablegroups.put("插件",492960241L);
-
+        EssentialSqlLite.getEssentialSqlLite();
 
          initPlugin();
          initCommands();
@@ -74,7 +73,7 @@ public class Menu {
         String message = Translate.getRealMessage(event.getMessage().sourceMessage.toString());
         Member member = event.getSender();
         Group group = event.getGroup();
-        Item i = MyBatis.getMyBatis().getEssentialDao().getItemInfo(00000001);
+        System.out.println("执行经济插件");
         if(enablegroups.values().contains(group.getId())) {
             for (String rootcommands : commands.keySet()) {
                 System.out.println(rootcommands+":"+message);

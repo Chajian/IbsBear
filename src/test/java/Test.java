@@ -1,21 +1,24 @@
 import com.bear.data.Item;
-import com.bear.sql.MyBatis;
 import com.bear.sql.dao.EssentialDao;
-import com.bear.util.StringRule;
-import com.bear.util.Translate;
+import com.bear.sql.sqlite.person.EssentialSqlLite;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.sql.SQLException;
 
 public class Test {
     public static void main(String[] args) {
-//        MyBatis myBatis = MyBatis.getMyBatis();
-//        myBatis.getEssentialDao().r egister(936796603L);
-//        myBatis.commit();
 //        System.out.println(myBatis.getEssentialDao().getUser(936796603L).toString());
-        Item i = MyBatis.getMyBatis().getEssentialDao().getItemInfo(00000001);
-        System.out.println(i.toString());
+//        Pattern pattern = Pattern.compile(StringRule.TRANSLATEMESSAGETWO.getRule());
+//        Matcher matcher = pattern.matcher("[ \"fs\" ]");
+//        if(matcher.find())
+//        System.out.println(matcher.group().replace("\"",""));
+        try {
+            Item item = new Item(00000000,"空气",0,"","啥也没有");
+            item = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().getItem(00000000);
+//            boolean isexcity = EssentialSqlLite.getEssentialSqlLite().getExcuteSql().deleteUser(user.getAccount());
+            System.out.println(item);
+//            EssentialSqlLite.getEssentialSqlLite().getExcuteSql().registerItem(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
