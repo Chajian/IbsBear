@@ -58,9 +58,17 @@ public class EssentialExcuteSqlLite extends ExcuteSqlLite {
         return back;
     }
 
-//    public synchronized BackItem getBackItem(int position)throws SQLException{
-//
-//    }
+    public synchronized BackItem getBackItem(int position)throws SQLException{
+        UserTable("ibs_backitem");
+        BackItem backItem = null;
+        String[] marks = new String[]{"position"};
+        ResultSet resultSet = find(marks,new Integer[]{position});
+        if(resultSet.first()){
+            backItem = new BackItem(resultSet.getInt("itemid"),resultSet.getInt("backid"),
+                    resultSet.getInt("position"),resultSet.getInt("size"));
+        }
+        return backItem;
+    }
 
     //检查用户
     public synchronized boolean checkUser(Long account) throws SQLException {
